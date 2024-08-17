@@ -1,6 +1,6 @@
 
 use shared::response_models::{Response, ResponseBody};
-use application::post::{create, read}; // 👈 New!
+use application::post::{create, read,publish,delete}; // 👈 New!
 use domain::models::{Post, NewPost}; // 👈 New! 
 use rocket::{get, post}; // 👈 New! 
 use rocket::response::status::{NotFound, Created}; // 👈 New! 
@@ -23,7 +23,23 @@ pub fn list_post_handler(post_id: i32) -> Result<String, NotFound<String>> {
 
     Ok(serde_json::to_string(&response).unwrap())
 }
+
 #[post("/new_post", format = "application/json", data = "<post>")]
 pub fn create_post_handler(post: Json<NewPost>) -> Created<String> {
     create::create_post(post)
+}
+#[get("/publish/<post_id>")]
+pub fn publish_post_handler(post_id: i32) -> Result<String, NotFound<String>> {
+    let post = publish::publish_post(post_id)?; 
+    let response = Response { body: ResponseBody::Post(post) };
+
+    Ok(serde_json::to_string(&response).unwrap())
+}
+
+#[get("/delete/<post_id>")]
+pub fn delete_post_handler(post_id: i32) -> Result<String, NotFound<String>> {
+    let posts = delete::delete_post(post_id)?;
+    let response = Response { body: ResponseBody::Posts(posts) };
+
+    Ok(serde_json::to_string(&response).unwrap())
 }
