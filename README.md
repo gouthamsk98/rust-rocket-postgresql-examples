@@ -7,6 +7,30 @@ This app is crud operation with rocket rs with postgress backend
 - PostgreSQL database installed and setup
 - The latest version of Rust (this porject uses v1.79.0)
 
+## Getting Started
+
+- Using a starter template, Install cargo-generate by following their installation instructions then run the following command:
+
+```bash
+crago install cargo-generate
+cargo generate --git https://github.com/gouthamsk98/rust-rocket-postgresql-template.git
+```
+
+## DB SETUP
+
+- install postgresql.
+  - linux
+    `sudo apt install postgresql postgresql-contrib`
+  - macos
+    `brew install postgresql`
+- Start postgresql service.
+  - linux
+    `sudo systemctl start postgresql.service`
+  - macos
+    `brew services start postgres`
+- we're going to run psql. We need to specify which database we're running from. Since there's a pre-created database called postgres, we're going to use that.
+  `psql -d postgres`
+
 ## Running locally
 
 - Install libpq for PostgreSQL
