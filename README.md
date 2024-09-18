@@ -1,4 +1,4 @@
-# Rocket - CRUD example
+# Rocket - Clean Architecture template
 
 This app is crud operation with rocket rs with postgress backend
 
